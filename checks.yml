@@ -1,0 +1,64 @@
+checks:
+  - name: "class-definition"
+    code: "CLS"
+    id: "CLS001"
+    description: "First line of a class definition"
+    pattern: './/ClassDef'
+  - name: "all-function-definition"
+    code: "FUNC"
+    id: "FUNC001"
+    description: "First executable line of a function, skipping over docstrings and/or comments"
+    pattern: '//FunctionDef/body/Expr[value/Constant]/following-sibling::*[1] | //FunctionDef/body[not(Expr/value/Constant)]/*[1]'
+  - name: "all-function-definition-with-docstring"
+    code: "FUNC"
+    id: "FUNC002"
+    description: "First executable line of a function with a docstring, skipping over docstrings and/or comments"
+    pattern: '//FunctionDef/body/Expr[value/Constant]/following-sibling::*[1]'
+  - name: "all-function-definition-with-no-docstring"
+    code: "FUNC"
+    id: "FUNC003"
+    description: "First executable line of a function without a docstring, skipping over comments"
+    pattern: '//FunctionDef/body[not(Expr/value/Constant)]/*[1]'
+  - name: "all-non-test-function-definition"
+    code: "FUNC"
+    id: "FUNC004"
+    description: "First executable line of a non-test function, skipping over docstrings and/or comments"
+    pattern: '//FunctionDef[not(contains(@name, "test_"))]/body/Expr[value/Constant]/following-sibling::*[1] | //FunctionDef[not(contains(@name, "test_"))]/body[not(Expr/value/Constant)]/*[1]'
+  - name: "all-test-function-definition"
+    code: "FUNC"
+    id: "FUNC004"
+    description: "First executable line of a test function, skipping over docstrings and/or comments"
+    pattern: '//FunctionDef[starts-with(@name, "test_")]/body/Expr[value/Constant]/following-sibling::*[1] | //AsyncFunctionDef[starts-with(@name, "test_")]/body/Expr[value/Constant]/following-sibling::*[1] | //FunctionDef[starts-with(@name, "test_")]/body[not(Expr/value/Constant)]/*[1] | //AsyncFunctionDef[starts-with(@name, "test_")]/body[not(Expr/value/Constant)]/*[1]'
+    count:
+      min: 7
+      max: 22
+  - name: "single-nested-if-in-function"
+    code: "CTRL"
+    id: "CTRL001"
+    description: "First line of an if statement only when defined in a function"
+    pattern: './/FunctionDef/body//If'
+  - name: "single-nested-if-anywhere-in-module"
+    code: "CTRL"
+    id: "CTRL002"
+    description: "First line of an if statement defined anywhere in a module"
+    pattern: './/If'
+  - name: "double-nested-if-in-function"
+    code: "CTRL"
+    id: "CTRL003"
+    description: "First line of a double-nested if statement defined in a function"
+    pattern: './/FunctionDef/body//If[ancestor::If and not(parent::orelse)]'
+  - name: "double-nested-if-anywhere-in-module"
+    code: "CTRL"
+    id: "CTRL004"
+    description: "First line of a double-nested if statement defined anywhere in a module"
+    pattern: './/If[ancestor::If and not(parent::orelse)]'
+  - name: "single-nested-for-target"
+    code: "CTRL"
+    id: "CTRL005"
+    description: "First line of a single-nested for statement defined anywhere in a module"
+    pattern: './/For/target/Name'
+  - name: "single-nested-for-target-no-count"
+    code: "CTRL"
+    id: "CTRL006"
+    description: "First line of a single-nested for statement defined anywhere in a module (no min or max)"
+    pattern: './/For/target/Name'

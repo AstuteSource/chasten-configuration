@@ -1,0 +1,6 @@
+# chasten configuration
+# used for testing purposes
+chasten:
+  # point to a checks file
+  checks-file:
+    - checks.yml
