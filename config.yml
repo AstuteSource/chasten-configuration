@@ -3,4 +3,4 @@
 chasten:
   # point to a checks file
   checks-file:
-    - https://raw.githubusercontent.com/simojo/chasten-configuration/master/checks.yml
+    - checks.yml
