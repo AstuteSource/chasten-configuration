@@ -5,4 +5,4 @@
 chasten:
   # point to a checks file
   checks-file:
-    - https://raw.githubusercontent.com/AstuteSource/chasten/master/.chasten/checks.yml
+    - https://raw.githubusercontent.com/AstuteSource/chasten-configuration/master/dummy_checks.yml
